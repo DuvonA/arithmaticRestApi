@@ -4,11 +4,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.lang.Integer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.yaml.snakeyaml.scanner.Scanner;
+import org.yaml.snakeyaml.tokens.Token;
 
 @RestController
-@Slf4j
+
 public class HomeController {
 
 	@RequestMapping("/")
@@ -25,5 +28,37 @@ public class HomeController {
 	public ResponseEntity<String> echo(@RequestParam("text")String text) {
 		return ResponseEntity.ok("echo::::"+text)  ;
 	}
+
+
+	@RequestMapping("/add")
+	//num1 is for parameter reference inside the program,number1 is used to specify the value in the webpage path
+	public ResponseEntity<Integer> Addition(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+
+		return ResponseEntity.ok(num1.intValue()+num2.intValue());
+	}
+
+	//Multiplication endpoint
+	@RequestMapping("/mult")
+	public ResponseEntity<Integer> Multiply(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2 ){
+		return ResponseEntity.ok(num1.intValue()*num2.intValue());
+	}
+
+	//Division endpoint
+	@RequestMapping("/div")
+	public ResponseEntity<Integer> Division(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+		return ResponseEntity.ok(num1.intValue()/num2.intValue());
+	}
+
+	//Subtraction endpoint
+	@RequestMapping("/sub")
+	public ResponseEntity<Integer> Subtraction(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+		return ResponseEntity.ok(num1.intValue()-num2.intValue());
+	}
+
+
+
+
+
+
 	
 }
