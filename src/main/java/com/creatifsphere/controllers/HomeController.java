@@ -45,8 +45,14 @@ public class HomeController {
 
 	//Division endpoint
 	@RequestMapping("/div")
-	public ResponseEntity<Integer> Division(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
-		return ResponseEntity.ok(num1.intValue()/num2.intValue());
+	public ResponseEntity<Integer> division(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+		try {
+			return ResponseEntity.ok(num1.intValue() / num2.intValue());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return ResponseEntity.ok(e.getMessage());
+		}
 	}
 
 	//Subtraction endpoint
