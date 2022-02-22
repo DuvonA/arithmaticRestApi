@@ -4,11 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.lang.Integer;
 
-import lombok.extern.slf4j.Slf4j;
-import org.yaml.snakeyaml.scanner.Scanner;
-import org.yaml.snakeyaml.tokens.Token;
+import com.creatifsphere.domain.ArithmaticResponse;
 
 @RestController
 
@@ -45,14 +42,17 @@ public class HomeController {
 
 	//Division endpoint
 	@RequestMapping("/div")
-	public ResponseEntity<Integer> division(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+	public ResponseEntity<ArithmaticResponse> division(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+		
+		ArithmaticResponse resp = new ArithmaticResponse();
 		try {
-			return ResponseEntity.ok(num1.intValue() / num2.intValue());
+			resp.setResult((float) (num1/ num2));
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return ResponseEntity.ok(e.getMessage());
+			resp.setErrorMessage(e.getMessage());
 		}
+		return ResponseEntity.ok(resp);
 	}
 
 	//Subtraction endpoint
