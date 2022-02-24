@@ -29,15 +29,35 @@ public class HomeController {
 
 	@RequestMapping("/add")
 	//num1 is for parameter reference inside the program,number1 is used to specify the value in the webpage path
-	public ResponseEntity<Integer> Addition(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+	public ResponseEntity<ArithmaticResponse> Addition(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
 
-		return ResponseEntity.ok(num1.intValue()+num2.intValue());
+		ArithmaticResponse addResp = new ArithmaticResponse();
+		try{
+			addResp.setResult((float)(num1+num2));
+		}
+		catch(Exception a){
+			a.printStackTrace();
+			addResp.setErrorMessage(a.getMessage());
+		}
+		return ResponseEntity.ok(addResp);
+
 	}
 
 	//Multiplication endpoint
 	@RequestMapping("/mult")
-	public ResponseEntity<Integer> Multiply(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2 ){
-		return ResponseEntity.ok(num1.intValue()*num2.intValue());
+	public ResponseEntity<ArithmaticResponse> Multiply(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2 ){
+		ArithmaticResponse multResp = new ArithmaticResponse();
+		try{
+			multResp.setResult((float)(num1*num2));
+		}
+		catch(Exception m){
+			//print error on the command line
+			m.printStackTrace();
+			multResp.setErrorMessage(m.getMessage());
+
+		}
+		return ResponseEntity.ok(multResp);
+
 	}
 
 	//Division endpoint
@@ -49,6 +69,7 @@ public class HomeController {
 			resp.setResult((float) (num1/ num2));
 		}
 		catch(Exception e){
+			//prints error message on the command line
 			e.printStackTrace();
 			resp.setErrorMessage(e.getMessage());
 		}
@@ -57,9 +78,26 @@ public class HomeController {
 
 	//Subtraction endpoint
 	@RequestMapping("/sub")
-	public ResponseEntity<Integer> Subtraction(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
-		return ResponseEntity.ok(num1.intValue()-num2.intValue());
+	public ResponseEntity<ArithmaticResponse> Subtraction(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+		ArithmaticResponse subresp = new ArithmaticResponse();
+		try{
+			subresp.setResult((float)(num1-num2));
+		}
+		catch(Exception s){
+			//prints error message thats on the command line
+			s.printStackTrace();
+			subresp.setErrorMessage(s.getMessage());
+		}
+		return ResponseEntity.ok(subresp);
 	}
+
+	/*@RequestMapping("/add")
+	//num1 is for parameter reference inside the program,number1 is used to specify the value in the webpage path
+	public ResponseEntity<Integer> Addition(@RequestParam("number1")Integer num1,@RequestParam("number2")Integer num2){
+
+		return ResponseEntity.ok(num1.intValue()+num2.intValue());
+	}
+	 */
 
 
 

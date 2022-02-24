@@ -17,5 +17,8 @@ public class ArithmaticResponse {
 	public void setResult(Float result) {
 		this.result = result;
 	}
+
+	//set results stores results from controller class in results variable
+	//get results returns the value of
 	
 }
